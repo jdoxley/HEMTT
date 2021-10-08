@@ -28,7 +28,7 @@ impl Task for Preprocess {
             if can_rap {
                 let (original_path, rendered_path) =
                     crate::RENDERED.lock().unwrap().get_paths(path.path().display().to_string());
-                let raw = crate::CACHED.lock().unwrap().clean_comments(&rendered_path)?.clone();
+                let raw = crate::CACHED.lock().unwrap()?.clone();
                 if raw.len() < 3 {
                     continue;
                 }
@@ -39,7 +39,7 @@ impl Task for Preprocess {
                 //     crate::CACHED.lock().unwrap().clean_comments(path.to_str().unwrap())
                 // }) {
                 match armake2::Config::from_string(raw.clone(), Some(PathBuf::from(&original_path)), &includes, |path| {
-                    crate::CACHED.lock().unwrap().clean_comments(path.to_str().unwrap()).unwrap()
+                    crate::CACHED.lock().unwrap().unwrap()
                 }) {
                     Ok(rapped) => {
                         let mut c = Cursor::new(Vec::new());

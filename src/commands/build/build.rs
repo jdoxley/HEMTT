@@ -88,7 +88,8 @@ impl Task for Build {
                 .to_str()
                 .unwrap()
                 .to_string();
-            let is_binarizable = binarize && BINARIZABLE.contains(&ext.as_str());
+            // let is_binarizable = binarize && BINARIZABLE.contains(&ext.as_str());
+            let is_binarizable = false;
 
             if name == "$PBOPREFIX$" {
                 let content = crate::CACHED
