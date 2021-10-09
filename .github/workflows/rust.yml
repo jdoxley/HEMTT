@@ -43,12 +43,6 @@ jobs:
           rustup toolchain update stable --no-self-update
           rustup default stable
 
-      - name: Build
-        run: cargo build --all
-
-      - name: Test
-        run: cargo test --all
-
       - name: Build (Release)
         run: |
           cargo build --all --release
@@ -59,35 +53,6 @@ jobs:
         with:
           name: hemtt-linux-x64
           path: target/release/hemtt-linux-x64
-
-  build-macos:
-    name: Build (macOS)
-    runs-on: macos-latest
-    steps:
-      - name: Checkout the source code
-        uses: actions/checkout@master
-
-      - name: Install Rust stable
-        run: |
-          rustup toolchain update stable --no-self-update
-          rustup default stable
-
-      - name: Build
-        run: cargo build --all
-
-      - name: Test
-        run: cargo test --all
-
-      - name: Build (Release)
-        run: |
-          cargo build --all --release
-          mv target/release/hemtt target/release/hemtt-macos
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: hemtt-macos
-          path: target/release/hemtt-macos
 
   build-windows:
     name: Build (Windows)
@@ -106,12 +71,6 @@ jobs:
           rustup toolchain update stable --no-self-update
           rustup default stable
 
-      - name: Build
-        run: cargo build --all
-
-      - name: Test
-        run: cargo test --all
-
       - name: Build (Release)
         run: |
           cargo build --all --release
@@ -129,7 +88,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build-linux
-      - build-macos
       - build-windows
     steps:
       - name: Download Linux x64
@@ -156,5 +114,3 @@ jobs:
           files: |
             release/*
           draft: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
