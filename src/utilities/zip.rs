@@ -46,7 +46,8 @@ pub fn archive(name: &str, p: Project) -> Result<(), HEMTTError> {
         // Write file or directory explicitly
         // Some unzip tools unzip files with directory paths correctly, some do not!
         if path.is_file() {
-            zip.start_file_from_path(name, options)?;
+            let _ = zip.start_file(&release_dir, options);
+            // zip.start_file(name, options)?;
 
             let mut f = BufReader::new(open_file!(path)?);
 
@@ -57,7 +58,8 @@ pub fn archive(name: &str, p: Project) -> Result<(), HEMTTError> {
             // Only if not root! Avoids path spec / warning
             // and mapname conversion failed error on unzip
             trace!("Adding directory: {}", name.display());
-            zip.add_directory_from_path(name, options)?;
+            let _ = zip.add_directory(&release_dir, options);
+            // zip.add_directory(name, options)?;
         }
     }
 

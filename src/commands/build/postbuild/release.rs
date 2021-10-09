@@ -1,6 +1,6 @@
 use std::fs;
 
-use dialoguer::Confirmation;
+use dialoguer::Confirm;
 use glob::glob;
 
 use crate::{AddonList, HEMTTError, Project, Stage, Task};
@@ -22,7 +22,7 @@ impl Task for Release {
                     return Err(error);
                 } else {
                     warn!("Release already exists");
-                    if Confirmation::new().with_text("Do you want to continue?").interact()? {
+                    if Confirm::new().with_prompt("Do you want to continue?").interact()? {
                         std::fs::remove_dir_all(&release_folder)?;
                     } else {
                         return Err(error);
