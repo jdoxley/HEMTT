@@ -8,7 +8,7 @@ edition = "2018"
 armake2 = {git = "https://github.com/synixebrett/armake2", branch = "restructure", default_features = false}
 bisign = {git = "https://github.com/synixebrett/bisign"}
 chrono = "0.4"
-clap = "2.33"
+clap = "2.34"
 config = "0.11"
 dialoguer = "0.6"
 docopt = "1"
