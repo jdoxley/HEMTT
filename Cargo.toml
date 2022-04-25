@@ -36,7 +36,7 @@ strum_macros = "0.21"
 subprocess = "0.2"
 toml = "0.5"
 walkdir = "2.3"
-webbrowser = "0.5"
+webbrowser = "0.7"
 zip = "0.5"
 
 [target.'cfg(windows)'.dependencies]
